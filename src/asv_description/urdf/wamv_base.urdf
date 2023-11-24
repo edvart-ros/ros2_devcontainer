@@ -180,6 +180,9 @@
 
   <link name="wamv/lidar_link">
   </link>
+  
+  <link name="wamv/camera_link">
+  </link>
 
   <!-- Joint to fix the position of base_link, to align with Unity -->
   <joint name="fix_origin_joint" type="fixed">
@@ -201,4 +204,11 @@
     <child link="wamv/lidar_link"/>
     <origin rpy="0 0 0" xyz="0.701 0 1.031"/>
   </joint>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="wamv/base_link"/>
+    <child link="wamv/camera_link"/>
+    <origin rpy="0 0 0" xyz="0.701 0 1.031"/>
+  </joint>
+
 </robot>

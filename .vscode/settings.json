@@ -6,5 +6,6 @@
     "python.analysis.extraPaths": [
         "/workspaces/ros2_devcontainer/install/ros_tcp_endpoint/lib/python3.10/site-packages",
         "/opt/ros/iron/lib/python3.10/site-packages"
-    ]
+    ],
+    "cmake.configureOnOpen": false
 }
