@@ -23,4 +23,11 @@ def generate_launch_description():
             output='screen',
             parameters=[{'robot_description': robot_desc}],
             arguments=[urdf]),
+        Node(
+            package='asv_nav',
+            executable='odom_tf',
+            name='odom_tf',
+            output='screen',
+            parameters=[{'robot_description': robot_desc}],
+            arguments=[urdf]),
     ])

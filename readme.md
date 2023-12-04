@@ -17,4 +17,6 @@ clone and build ros_tcp_endpoint (ros2 branch):
 
 `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=0.0.0.0 -p ROS_TCP_PORT:=10001`
 
+
+This can be used with rviz2 as long as the xforward is configured. If using foxglove:
 `ros2 launch foxglove_bridge foxglove_bridge_launch.xml`

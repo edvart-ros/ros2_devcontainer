@@ -8,8 +8,8 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Imu
 
 
-BASE_LINK_FRAME = "/wamv/base_link"
-ODOM_FRAME = "/wamv/odom"
+BASE_LINK_FRAME = "base_link"
+ODOM_FRAME = "odom"
 
 class OdomTF(Node):
 

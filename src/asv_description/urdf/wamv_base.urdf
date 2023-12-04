@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="wam-v">
-  <link name="wamv/base_link"/>
-  <link name="wamv/dummy_link_fix_mesh_origin">
+  <link name="base_link"/>
+  <link name="dummy_link_fix_mesh_origin">
     <visual>
       <geometry>
         <mesh filename="package://asv_description/models/WAM-V-Base/mesh/WAM-V-Base.dae"/>
@@ -175,39 +175,49 @@
     </inertial>
   </link>
   <!-- IMU Sensor Link -->
-  <link name="wamv/imu_link">
+  <link name="imu_link">
   </link>
 
-  <link name="wamv/lidar_link">
+  <link name="lidar_link">
   </link>
   
-  <link name="wamv/camera_link">
+  <link name="camera_link">
+  </link>
+
+  <link name="base_footprint">
   </link>
 
   <!-- Joint to fix the position of base_link, to align with Unity -->
   <joint name="fix_origin_joint" type="fixed">
-    <parent link="wamv/base_link"/>
-    <child link="wamv/dummy_link_fix_mesh_origin"/>
+    <parent link="base_link"/>
+    <child link="dummy_link_fix_mesh_origin"/>
     <origin rpy="0 0 0" xyz="0 0 -0.36"/>
     <!-- Assuming IMU is at the center of the base link -->
   </joint>
 
-  <!-- sensor links -->
+  <!-- base footprint joint-->
+  <joint name="footprint_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+  </joint>
+
+  <!-- sensor joints -->
   <joint name="imu_joint" type="fixed">
-    <parent link="wamv/base_link"/>
-    <child link="wamv/imu_link"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
     <origin rpy="0 0 0" xyz="0 0 0.944"/>
   </joint>
 
   <joint name="lidar_joint" type="fixed">
-    <parent link="wamv/base_link"/>
-    <child link="wamv/lidar_link"/>
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
     <origin rpy="0 0 0" xyz="0.701 0 1.031"/>
   </joint>
 
   <joint name="camera_joint" type="fixed">
-    <parent link="wamv/base_link"/>
-    <child link="wamv/camera_link"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
     <origin rpy="0 0 0" xyz="0.701 0 1.031"/>
   </joint>
 
