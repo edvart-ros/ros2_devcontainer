@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'odom_tf = asv_nav.odom_tf:main',
             'cmd_force = asv_nav.cmd_force:main',
+            'cmd_vel = asv_nav.cmd_vel:main',
         ],
     },
 )

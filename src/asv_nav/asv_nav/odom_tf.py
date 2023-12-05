@@ -14,7 +14,7 @@ ODOM_FRAME = "odom"
 class OdomTF(Node):
 
     def __init__(self):
-        super().__init__('turtle_tf2_frame_publisher')
+        super().__init__('odom_tf')
         self.tf_broadcaster = TransformBroadcaster(self)
         self.odom_subscription = self.create_subscription(Odometry, "odometry", self.odom_cb,1)
         self.imu_sub = self.create_subscription(Imu, "imu/raw", self.imu_cb, 1)

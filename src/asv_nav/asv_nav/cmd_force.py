@@ -4,31 +4,29 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32
 import numpy as np
-import matplotlib.pyplot as plt
-import cvxpy as cp
 
 #rear left
-L1_X = -2.316
-L1_Y = 1.029
+L1_X = -2.51
+L1_Y = 1.03
 #rear right
-L2_X = -2.316
-L2_Y = -1.029
+L2_X = -2.51
+L2_Y = -1.03
 #front left
-L3_X = 1.707
-L3_Y = 1.029
+L3_X = 1.52
+L3_Y = 1.03
 #front right
-L4_X = 1.707
-L4_Y = -1.029
+L4_X = 1.52
+L4_Y = -1.03
 
 REAR_THRUSTER_ANGLE = np.pi/6 #rear thruster angle
 
-B_r = np.array([[1, 0, 1, 0],
-                [0, 0, 0, 1],
+B_r = np.array([[  1,     0,    1,     0 ],
+                [  0,     1,    0,     1 ],
                 [-L1_Y, L1_X, -L2_Y, L2_X]])
 # configuration for the fixed front thrusters
 
-B_f = np.array([[1, 0, 1, 0],
-                [0, 0, 0, 1],
+B_f = np.array([[  1,     0,     1,     0 ],
+                [  0,     1,     0,     1 ],
                 [-L3_Y, L3_X, -L4_Y, L4_X]])
 
 # matrix for azimuthing configuration
@@ -47,7 +45,7 @@ ANGLE_TOLERANCE = np.pi/2
 class CmdForce(Node):
 
     def __init__(self):
-        super().__init__('turtle_tf2_frame_publisher')
+        super().__init__('cmd_force')
         self.force_sub = self.create_subscription(Twist, "cmd_force", self.cmd_force_callback, 1)
         
         self.rl_thrust_pub = self.create_publisher(Float32, '/rear_left_thruster/thrust', 10)
@@ -65,9 +63,9 @@ class CmdForce(Node):
     def publish_angle_commands(self, angles):
         angles = angles*(180/np.pi)
         self.rl_dir_pub.publish(Float32(data=angles[0]))
-        self.rr_dir_pub.publish(Float32(data=angles[0]))
-        self.fl_dir_pub.publish(Float32(data=angles[0]))
-        self.fr_dir_pub.publish(Float32(data=angles[0]))
+        self.rr_dir_pub.publish(Float32(data=angles[1]))
+        self.fl_dir_pub.publish(Float32(data=angles[2]))
+        self.fr_dir_pub.publish(Float32(data=angles[3]))
 
     def publish_thrust_commands(self, thrusts):
         self.rl_thrust_pub.publish(Float32(data=thrusts[0]))
@@ -93,7 +91,7 @@ class CmdForce(Node):
             
         angles = np.zeros(4)
         for i in range(4):
-            angles[i] = np.arctan2(u[2*i+1,0], u[2*i,0])
+            angles[i] = -np.arctan2(u[2*i+1,0], u[2*i,0])
 
         # if angle violated, flip direction and reverse thrust
         for i in range(len(angles)):
@@ -104,6 +102,17 @@ class CmdForce(Node):
             
         self.publish_angle_commands(angles)
         self.publish_thrust_commands(f)
+        print('u:   ')
+        print(u)
+        print('-------')
+        print('f:   ')
+        print(f)
+        print('-------')
+        print('angles:   ')
+        print(angles)
+        print('-------')
+        print()
+        print()
 
 def main():
     rclpy.init()
