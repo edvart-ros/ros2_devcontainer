@@ -50,23 +50,18 @@ class CmdVel(Node):
         self.r = msg.twist.twist.angular.z
 
     def controller_cb(self):
-        #surge-yaw PID control loop
-        u_e_prev = self.u_e_prev
-        r_e_prev = self.r_e_prev
+        # Surge-yaw PID control loop
         u_e = self.u_d - self.u
         r_e = self.r_d - self.r
-        self.u_e_acc += ((u_e + u_e_prev)/2)*self.dt
-        self.r_e_acc += ((r_e + r_e_prev)/2)*self.dt
-        
+        self.u_e_acc += ((u_e + self.u_e_prev) / 2) * self.dt
+        self.r_e_acc += ((r_e + self.r_e_prev) / 2) * self.dt
 
-        Fx = self.K_up*u_e + self.K_ud*((u_e-u_e_prev)/self.dt) + self.K_ui*self.u_e_acc
-        Mz = self.K_rp*r_e + self.K_rd*((r_e-r_e_prev)/self.dt) + self.K_ri*self.r_e_acc
+        Fx = self.K_up * u_e + self.K_ud * ((u_e - self.u_e_prev) / self.dt) + self.K_ui * self.u_e_acc
+        Mz = self.K_rp * r_e + self.K_rd * ((r_e - self.r_e_prev) / self.dt) + self.K_ri * self.r_e_acc
 
-        self.force_pub.publish(Twist(linear = Vector3(x = Fx), angular = Vector3(z = Mz)))
+        self.force_pub.publish(Twist(linear=Vector3(x=Fx), angular=Vector3(z=Mz)))
         self.u_e_prev = u_e
         self.r_e_prev = r_e
-        return
-
 
 
 def main():
