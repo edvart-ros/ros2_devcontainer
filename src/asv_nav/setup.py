@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'odom_tf = asv_nav.odom_tf:main',
+            'cmd_force = asv_nav.cmd_force:main',
         ],
     },
 )

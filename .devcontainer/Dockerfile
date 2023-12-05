@@ -5,3 +5,5 @@ RUN apt-get install -y --fix-missing\
     ros-iron-xacro ros-iron-image-view ros-iron-foxglove-bridge\
     ros-iron-compressed-image-transport ros-iron-pointcloud-to-laserscan\
     ros-iron-slam-toolbox
+
+RUN pip install cvxpy
