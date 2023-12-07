@@ -13,7 +13,7 @@ setup(
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         (share_dir, ["package.xml"]),
-        (os.path.join('share', package_name, 'launch'), ['launch/bringup.py']),
+        (os.path.join('share', package_name, 'launch'), ['launch/bringup.py', 'launch/nav2.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

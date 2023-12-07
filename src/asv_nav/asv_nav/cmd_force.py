@@ -102,17 +102,6 @@ class CmdForce(Node):
             
         self.publish_angle_commands(angles)
         self.publish_thrust_commands(f)
-        print('u:   ')
-        print(u)
-        print('-------')
-        print('f:   ')
-        print(f)
-        print('-------')
-        print('angles:   ')
-        print(angles)
-        print('-------')
-        print()
-        print()
 
 def main():
     rclpy.init()

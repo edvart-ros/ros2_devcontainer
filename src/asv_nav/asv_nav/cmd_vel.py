@@ -62,6 +62,7 @@ class CmdVel(Node):
         self.force_pub.publish(Twist(linear=Vector3(x=Fx), angular=Vector3(z=Mz)))
         self.u_e_prev = u_e
         self.r_e_prev = r_e
+        print(self.u_d, self.r_d)
 
 
 def main():

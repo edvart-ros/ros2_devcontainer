@@ -14,9 +14,15 @@ clone and build ros_tcp_endpoint (ros2 branch):
 `colcon build --symlink-install`
 
 `source /workspaces/ros2_devcontainer/install/setup.bash`
+To add automatic environment sourcing (ros-iron and workspace) to the .bashrc file: 
+`source /workspaces/ros2_devcontainer/setup_source.sh`
 
 `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=0.0.0.0 -p ROS_TCP_PORT:=10001`
 
 
 This can be used with rviz2 as long as the xforward is configured. If using foxglove:
 `ros2 launch foxglove_bridge foxglove_bridge_launch.xml`
+
+
+bringup:
+`ros2 launch asv_launch bringup.py`
