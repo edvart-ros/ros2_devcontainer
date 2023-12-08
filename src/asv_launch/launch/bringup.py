@@ -25,7 +25,7 @@ def generate_launch_description():
             executable='odom_tf',
             name='odom_tf',
             output='screen',
-            parameters=[{'robot_description': robot_desc}],
+            parameters=[{'use_sim_time': True}],
             arguments=[urdf]),
 
         Node(
@@ -52,13 +52,14 @@ def generate_launch_description():
             executable='pointcloud_to_laserscan_node',
             name='pointcloud_to_laserscan',
             output='screen',
-            remappings=[('/cloud_in', '/points')]),
+            remappings=[('/cloud_in', '/points')],
+            parameters=[{'use_sim_time': True}]),
 
         # SLAM Toolbox Node
         Node(
             package='slam_toolbox',
             executable='map_and_localization_slam_toolbox_node',
             name='slam_toolbox',
-            output='screen'),
-        
+            output='screen',
+            parameters=[{'use_sim_time': True}]),
     ])

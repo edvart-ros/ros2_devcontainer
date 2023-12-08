@@ -8,7 +8,7 @@ import numpy as np
 import math
 
 MAX_LIN_VEL = 1.0
-MAX_ANG_VEL = 0.3
+MAX_ANG_VEL = 0.5
 
 
 def clamp(n, min, max): 
